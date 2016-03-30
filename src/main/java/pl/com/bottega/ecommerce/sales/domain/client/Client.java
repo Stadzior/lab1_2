@@ -18,6 +18,7 @@ package pl.com.bottega.ecommerce.sales.domain.client;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.ClientData;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.Id;
 import pl.com.bottega.ecommerce.sales.domain.payment.Payment;
+import pl.com.bottega.ecommerce.sales.domain.payment.PaymentFactory;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class Client {
@@ -25,6 +26,8 @@ public class Client {
 	private String name;
 
 	private Id aggregateId;
+
+    private PaymentFactory paymentFactory = new PaymentFactory();
 
 	public ClientData generateSnapshot() {
 		return new ClientData(aggregateId, name);
@@ -47,10 +50,7 @@ public class Client {
 		if (!canAfford(amount)) {
 			domainError("Can not afford: " + amount);
 		}
-		// TODO facade to the payment module
-		Id id = Id.generate();
-		return new Payment(id, generateSnapshot(), amount);
-
+        return paymentFactory.create(generateSnapshot(), amount);
 	}
 
 	private void domainError(String string) {

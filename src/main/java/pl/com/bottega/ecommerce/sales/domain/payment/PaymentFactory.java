@@ -21,7 +21,7 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class PaymentFactory {
 
-	public Payment createPayment(ClientData clientData, Money amount) {
+	public Payment create(ClientData clientData, Money amount) {
 
 		Id aggregateId = Id.generate();
 
