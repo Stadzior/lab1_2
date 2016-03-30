@@ -21,7 +21,7 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class PaymentFactory {
 
-	public Payment create(ClientData clientData, Money amount) {
+	public static Payment create(ClientData clientData, Money amount) {
 		return new Payment(Id.generate(), clientData, amount);
 	}
 }

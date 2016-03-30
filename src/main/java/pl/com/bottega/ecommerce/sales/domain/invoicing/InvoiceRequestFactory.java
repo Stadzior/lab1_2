@@ -21,7 +21,7 @@ import pl.com.bottega.ecommerce.sales.domain.purchase.PurchaseItem;
 
 public class InvoiceRequestFactory {
 
-	public InvoiceRequest create(Client client, Purchase... purchases) {
+	public static InvoiceRequest create(Client client, Purchase... purchases) {
 		InvoiceRequest request = new InvoiceRequest(client.generateSnapshot());
 
 		for (Purchase purchase : purchases) {
