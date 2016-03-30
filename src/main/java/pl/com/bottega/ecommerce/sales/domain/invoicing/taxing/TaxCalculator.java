@@ -2,14 +2,13 @@ package pl.com.bottega.ecommerce.sales.domain.invoicing.taxing;
 
 import pl.com.bottega.ecommerce.sales.domain.invoicing.RequestItem;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
-
 import java.math.BigDecimal;
 
 /**
  * Created by Kamil on 2016-03-30.
  */
 public class TaxCalculator implements ITaxCalculator {
-    public Money calculate(RequestItem item) throws IllegalArgumentException{
+    public Tax calculate(RequestItem item) throws IllegalArgumentException{
         Money net = item.getTotalCost();
         BigDecimal ratio = null;
         String desc = null;
@@ -31,6 +30,7 @@ public class TaxCalculator implements ITaxCalculator {
             default:
                 throw new IllegalArgumentException(item.getProductData().getType() + " not handled");
         }
-        return net.multiplyBy(ratio);
+
+        return TaxFactory.create(net.multiplyBy(ratio),desc);
     }
 }
