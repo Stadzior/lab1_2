@@ -15,27 +15,16 @@
  */
 package pl.com.bottega.ecommerce.sales.domain.payment;
 
-import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.ClientData;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.Id;
+import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.ClientData;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
-public class Payment {
+public class PaymentFactory {
 
-	private ClientData clientData;
+	public Payment createPayment(ClientData clientData, Money amount) {
 
-	private Money amount;
+		Id aggregateId = Id.generate();
 
-	private Id aggregateId;
-
-    private PaymentFactory paymentFactory = new PaymentFactory();
-
-	public Payment(Id aggregateId, ClientData clientData, Money amount) {
-		this.aggregateId = aggregateId;
-		this.clientData = clientData;
-		this.amount = amount;
-	}
-
-	public Payment rollBack() {
-        return paymentFactory.createPayment(clientData,amount.multiplyBy(-1));
+		return new Payment(aggregateId, clientData, amount);
 	}
 }
