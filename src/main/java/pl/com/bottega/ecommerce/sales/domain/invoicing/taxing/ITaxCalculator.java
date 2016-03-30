@@ -1,5 +1,6 @@
-package pl.com.bottega.ecommerce.sales.domain.invoicing;
+package pl.com.bottega.ecommerce.sales.domain.invoicing.taxing;
 
+import pl.com.bottega.ecommerce.sales.domain.invoicing.RequestItem;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 /**

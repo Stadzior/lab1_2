@@ -1,4 +1,4 @@
-package pl.com.bottega.ecommerce.sales.domain.invoicing;
+package pl.com.bottega.ecommerce.sales.domain.invoicing.taxing;
 
 /**
  * Created by Kamil on 2016-03-30.

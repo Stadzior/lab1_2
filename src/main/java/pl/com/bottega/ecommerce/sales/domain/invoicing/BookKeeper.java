@@ -15,7 +15,10 @@
  */
 package pl.com.bottega.ecommerce.sales.domain.invoicing;
 
-import pl.com.bottega.ecommerce.sharedkernel.Money;
+import pl.com.bottega.ecommerce.sales.domain.invoicing.taxing.ITaxCalculator;
+import pl.com.bottega.ecommerce.sales.domain.invoicing.taxing.Tax;
+import pl.com.bottega.ecommerce.sales.domain.invoicing.taxing.TaxCalculatorFactory;
+import pl.com.bottega.ecommerce.sales.domain.invoicing.taxing.TaxFactory;
 
 public class BookKeeper {
 
@@ -25,10 +28,8 @@ public class BookKeeper {
 		for (RequestItem item : request.getItems()) {
 
             ITaxCalculator taxCalculator = TaxCalculatorFactory.create();
-					
-			Money taxValue = taxCalculator.calculate(item);
-			
-			Tax tax = TaxFactory.create(taxValue, desc);
+
+			Tax tax = TaxFactory.create(taxCalculator);
 
 			InvoiceLine invoiceLine = InvoiceLineFactory.create(item.getProductData(),item.getQuantity(), item.getTotalCost(), tax);
 			invoice.addItem(invoiceLine);
